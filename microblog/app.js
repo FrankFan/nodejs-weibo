@@ -6,10 +6,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 // express 3.0+ 取消了对默认layout.ejs的支持，必须手动引用express-partials
 var partials = require('express-partials'); 
+var util = require('util'); // 视图助手
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var hello = require('./routes/hello');
+var helper = require('./routes/helper');
 
 var app = express();
 
@@ -29,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/hello', hello);
+app.use('/helper', helper);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
