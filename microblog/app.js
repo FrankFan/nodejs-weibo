@@ -5,10 +5,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 // express 3.0+ 取消了对默认layout.ejs的支持，必须手动引用express-partials
-var partials = require('express-partials'); 
+var partials = require('express-partials');
+// var session = require('express-session');
 
-var MongoStore = require('connect-mongo'); 
-var settings = require('settings');
+// var MongoStore = require('connect-mongo')(session);
+// var settings = require('./settings');
+
+// console.log(MongoStore);
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -30,12 +33,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 // mongodb
-app.use(express.session({
-    secret: settings.cookieSecret,
-    store: new MongoStore({
-        db: settings.db
-    })
-}));
+// app.use(session({
+//     secret: settings.cookieSecret,
+//     store: new MongoStore({
+//         db: settings.db
+//     })
+// }));
 
 app.use('/', routes);
 app.use('/users', users);
