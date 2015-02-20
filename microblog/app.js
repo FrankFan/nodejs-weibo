@@ -13,10 +13,7 @@ var partials = require('express-partials');
 
 // console.log(MongoStore);
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
-var hello = require('./routes/hello');
-var helper = require('./routes/helper');
+
 
 var app = express();
 
@@ -40,10 +37,22 @@ app.use(express.static(path.join(__dirname, 'public')));
 //     })
 // }));
 
+// 测试页面路由规则定义
+var routes = require('./routes/index');
+var users = require('./routes/users');
+var hello = require('./routes/hello');
+var helper = require('./routes/helper');
+
+// 微博系统路由规则定义
+var reg = require('./routes/reg');
+
+
 app.use('/', routes);
 app.use('/users', users);
 app.use('/hello', hello);
 app.use('/helper', helper);
+
+app.use('/reg', reg);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
